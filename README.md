@@ -22,10 +22,6 @@ The project focuses on six FTSE 100 companies: AstraZeneca, GlaxoSmithKline, BP,
 
 The project begins with exploring historical stock data using the yfinance API. It involves downloading and analyzing opening price, highest and lowest prices, closing price, trading volume, and adjusted close price. The adjusted close price, accounting for stock splits and dividends, will be used for prediction.
 
-## Technical Analysis<a name="technical-analysis"></a>
-
-The technical analysis section employs various indicators like Moving Averages, MACD, Stochastic Oscillator, RSI, and more. These indicators are used to identify trading signals and patterns. The goal is to explore different technical strategies to enhance prediction accuracy.
-
 ## Time Series Forecasting<a name="time-series-forecasting"></a>
 
 Time series models are crucial for predicting stock trends. The project covers the process of transforming non-stationary data into stationary form using differencing. Different time series models like ARIMA, SARIMA, and Facebook Prophet are evaluated. Additionally, RNN models like LSTM and GRU are explored for deeper analysis.
@@ -51,11 +47,10 @@ The project utilizes a wide range of Python libraries for data manipulation, vis
 The project follows a structured approach:
 
 1. **Exploratory Data Analysis**: Understand the historical stock data.
-2. **Technical Analysis**: Apply various technical indicators and strategies.
-3. **Time Series Forecasting**: Build and evaluate time series models.
-4. **Sentiment Analysis**: Collect and analyze news article sentiments.
-5. **Algorithm Selection and Training**: Choose and train ML models.
-6. **Conclusion**: Summarize findings and insights.
+2. **Time Series Forecasting**: Build and evaluate time series models.
+3. **Sentiment Analysis**: Collect and analyze news article sentiments.
+4. **Algorithm Selection and Training**: Choose and train ML models.
+5. **Conclusion**: Summarize findings and insights.
 
 ## Getting Started<a name="getting-started"></a>
 
