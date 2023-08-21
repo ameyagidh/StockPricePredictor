@@ -66,5 +66,6 @@ The detailed analysis and thorough evaluation of different strategies and models
 
 ## References
 https://www.investing.com/equities/
+
 https://finance.yahoo.com/quote/API/
 
