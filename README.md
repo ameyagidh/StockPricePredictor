@@ -4,7 +4,6 @@
 
 The goal of this project is to develop and evaluate various machine learning models for predicting stock market movements using a combination of historical time series data and sentiment analysis from news articles. The project aims to explore different approaches to improve the accuracy of predictions and backtest strategies against benchmark results.
 
-The project focuses on six FTSE 100 companies: AstraZeneca, GlaxoSmithKline, BP, Royal Dutch Shell, HSBC, and Unilever. These companies represent diverse sectors such as oil, pharmaceuticals, finance, and consumer goods.
 
 ## Table of Contents
 1. [Exploratory Data Analysis](#exploratory-data-analysis)
