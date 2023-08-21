@@ -63,3 +63,8 @@ To run the project, follow these steps:
 The Stock Market Prediction project explores a holistic approach to predicting stock market movements using a combination of technical analysis, time series forecasting, and sentiment analysis. By leveraging historical data and NLP techniques, the project aims to develop accurate prediction models that can aid in making informed trading decisions.
 
 The detailed analysis and thorough evaluation of different strategies and models provide insights into the complexities of stock market prediction and demonstrate the potential of combining multiple approaches for improved accuracy.
+
+## References
+https://www.investing.com/equities/
+https://finance.yahoo.com/quote/API/
+
