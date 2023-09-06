@@ -4,6 +4,9 @@
 
 The goal of this project is to develop and evaluate various machine learning models for predicting stock market movements using a combination of historical time series data and sentiment analysis from news articles. The project aims to explore different approaches to improve the accuracy of predictions and backtest strategies against benchmark results.
 
+Real Time StockMarket Data Storage is done on AWS Athena using AWS Glue Crawler, I used an S3 bucket and an EC2 instance to configure this using Apache kafka and zookeeper
+link to Dynamic Storage repository :- https://github.com/ameyagidh/MarketWatchDog
+
 
 ## Table of Contents
 1. [Exploratory Data Analysis](#exploratory-data-analysis)
