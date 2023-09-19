@@ -1,0 +1,98 @@
+   <style>
+    /* Reset some default styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Set a background color for the entire page */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Navigation Bar Styles */
+    .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+.my-logo {
+    text-align: center;
+}
+
+    .logo {
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .nav-links {
+        list-style: none;
+        margin-top: 10px;
+    }
+
+    .nav-links li {
+        display: inline;
+        margin-right: 20px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    /* Main Content Styles */
+    h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* News Article Styles */
+    .article {
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    p {
+        margin: 0;
+        color: #444;
+        font-size: 16px;
+    }
+
+    .article-date {
+        color: #777;
+        font-size: 14px;
+    }
+
+    /* Article Link Styles */
+    .article-link {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .article-link:hover {
+        text-decoration: underline;
+    }
+</style>

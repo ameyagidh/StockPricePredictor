@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Articles</title>
+      <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+           <div class="my-logo"><a class="logo" href="/" >Trade Genius</a></div>
+            <div class="container">
+                <ul class="nav-links">
+                    <li><a href="/home">Stocks</a></li>
+                    <li><a href="/indicator">Indicators</a></li>
+                    <li><a href="/crypto">Crypto</a></li>
+                    <li><a href="/news">News</a></li>
+                </ul>
+            </div>
+        </nav>
+        <h1 class="news-h1">Latest News</h1>
+    </header>
+
+    <div class="container">
+         {% for article in news_data %}
+        <div class="article">
+            <h2><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h2>
+            <p>{{ article.description }}</p>
+            <p class="article-date">Published at: {{ article.published_at }} </p>
+        </div>
+        {% endfor %}
+        <div class="article">
+            <h2><a class="article-link" href="#">Headline of the Second News Article</a></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in erat vel ante bibendum auctor.</p>
+            <p class="article-date">Published on: September 18, 2023</p>
+        </div>
+    </div>
+</body>
+</html>

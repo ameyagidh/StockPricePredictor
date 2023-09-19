@@ -1,0 +1,195 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set a background color for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the navigation bar */
+.navbar {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.my-logo {
+    text-align: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.logo {
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.nav-links {
+    list-style: none;
+    margin-top: 10px;
+}
+
+.nav-links li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    transition: color 0.3s; /* Add a smooth color transition effect */
+}
+
+.nav-links a:hover {
+    color: #007bff; /* Change color on hover */
+}
+
+/* Main Content Styles */
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+p {
+    font-size: 18px;
+    color: #444;
+}
+
+/* Stock Selection Form Styles */
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add a smooth background color transition effect */
+}
+
+button:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}
+
+li {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.title-main {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.title-sub {
+    font-size: 18px;
+    color: #777;
+}
+
+/* Crypto Container Styles */
+.container2 {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Crypto Item Styles */
+.crypto-item {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+}
+
+.crypto-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.crypto-info {
+    font-size: 18px;
+    color: #777;
+}
+/* News Article Styles */
+    .article {
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    p {
+        margin: 0;
+        color: #444;
+        font-size: 16px;
+    }
+
+    .article-date {
+        color: #777;
+        font-size: 14px;
+    }
+
+    /* Article Link Styles */
+    .article-link {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    .article-link:hover {
+        text-decoration: underline;
+    }
+
+    .news-h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-align: center;
+    }

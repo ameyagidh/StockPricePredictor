@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="my-logo"><a class="logo" href="/" >Trade Genius</a></div>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/home">Stocks</a></li>
+                <li><a href="/indicator">Indicators</a></li>
+                <li><a href="/crypto">Crypto</a></li>
+                <li><a href="/news">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Welcome to the Stock Web App</h1>
+        <p>Get real-time stock data, manage your portfolio, and stay updated with the latest news.</p>
+
+        <!-- Stock Selection Form -->
+        <form action="/predict" method="POST">
+            <label for="stock_symbol">Select a Stock:</label>
+            <select id="stock_symbol" name="stock_symbol" required>
+                <option value="AAPL">Apple Inc.</option>
+                <option value="GOOGL">Alphabet Inc.</option>
+                <option value="MSFT">Microsoft Corporation</option>
+
+            </select>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+</body>
+</html>

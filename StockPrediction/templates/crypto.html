@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeGenius</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="my-logo"><a class="logo" href="/" >Trade Genius</a></div>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/home">Stocks</a></li>
+                <li><a href="/indicator">Indicators</a></li>
+                <li><a href="/crypto">Crypto</a></li>
+                <li><a href="/news">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Display cryptocurrency data -->
+    <div class="container2">
+        <h1>Crypto Market Data</h1>
+        <ul>
+            {% for crypto in cryptocurrencies %}
+            <li>
+                <h2>{{ crypto.name }}</h2>
+                <p>Symbol: {{ crypto.symbol }}</p>
+                <p>Price (USD): ${{ crypto.quote.USD.price|round(2) }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
