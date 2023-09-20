@@ -20,22 +20,67 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container">
-        <h1>Welcome to the Stock Web App</h1>
-        <p>Get real-time stock data, manage your portfolio, and stay updated with the latest news.</p>
-
-        <!-- Stock Selection Form -->
-        <form action="/predict" method="POST">
-            <label for="stock_symbol">Select a Stock:</label>
-            <select id="stock_symbol" name="stock_symbol" required>
-                <option value="AAPL">Apple Inc.</option>
-                <option value="GOOGL">Alphabet Inc.</option>
-                <option value="MSFT">Microsoft Corporation</option>
-
-            </select>
-            <button type="submit">Predict</button>
+<div class="container mt-4">
+        <h1 class="mb-4">Stock Data Viewer</h1>
+        <form action="/results" method="post">
+            <div class="form-group">
+                <label for="stock_symbol">Select a Stock:</label>
+                <select class="form-control" name="stock_symbol" id="stock_symbol" required>
+                    <option value="AAPL">AAPL (Apple Inc.)</option>
+                    <option value="MSFT">MSFT (Microsoft Corporation)</option>
+                    <option value="GOOGL">GOOGL (Alphabet Inc. - Class A)</option>
+                    <option value="AMZN">AMZN (Amazon.com Inc.)</option>
+                    <option value="TSLA">TSLA (Tesla, Inc.)</option>
+                    <option value="FB">FB (Meta Platforms, Inc.)</option>
+                    <option value="BRK-B">BRK-B (Berkshire Hathaway Inc. - Class B)</option>
+                    <option value="JPM">JPM (JPMorgan Chase & Co.)</option>
+                    <option value="NVDA">NVDA (NVIDIA Corporation)</option>
+                    <option value="AAP">AAP (Advance Auto Parts, Inc.)</option>
+                    <option value="DIS">DIS (The Walt Disney Company)</option>
+                    <option value="KO">KO (The Coca-Cola Company)</option>
+                    <option value="INTC">INTC (Intel Corporation)</option>
+                    <option value="VZ">VZ (Verizon Communications Inc.)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        {% if stock_symbol %}
+        <h2 class="mt-4">Selected Stock: {{ stock_symbol }}</h2>
+        {% endif %}
+
+        {% if error_message %}
+        <p class="text-danger">{{ error_message }}</p>
+        {% endif %}
+
+        {% if data %}
+        <h2 class="mt-4">Stock Data</h2>
+        <table class="table table-bordered">
+            {{ data | safe }}
+        </table>
+        {% endif %}
+
+        <h2 class="mt-4">Prophet Forecast</h2>
+        {% if forecast_plot_html %}
+        <div>
+        {{ forecast_plot_html | safe }}
+        </div>
+        {% endif %}
+
+        <h2 class="mt-4">Moving Average</h2>
+        {% if plot_html %}
+        <div>
+            {{ plot_html | safe }}
+        </div>
+        {% endif %}
+
+        <h2 class="mt-4">RSI (Relative Strength Index)</h2>
+        {% if rsi_plot_html %}
+        <div>
+            {{ rsi_plot_html | safe }}
+        </div>
+        {% endif %}
     </div>
+
 </body>
 </html>

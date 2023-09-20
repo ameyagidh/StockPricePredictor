@@ -4,7 +4,11 @@ from bs4 import BeautifulSoup
 from flask import Flask, render_template, jsonify,  request
 from flask_debugtoolbar import DebugToolbarExtension
 import yfinance as yf
-
+import pandas as pd
+from prophet import Prophet
+from prophet.plot import plot_plotly
+from plotly import graph_objs as go
+from datetime import date
 import requests
 
 app = Flask(__name__)
@@ -79,10 +83,93 @@ def news():
     scraped_data = scrape_news()
     return render_template('news.html', news_data=scraped_data)
 
+def technicalIndicator(indi, data):
+    if indi == "Moving Average":
+        period_ma = 15
+        data[f'{period_ma} Day MA'] = data['Close'].rolling(window=period_ma).mean()
+    elif indi == "RSI":
+        period_rsi = 15
+        delta = data['Close'].diff(1)
+        gain = delta.where(delta > 0, 0)
+        loss = -delta.where(delta < 0, 0)
+        avg_gain = gain.rolling(window=period_rsi).mean()
+        avg_loss = loss.rolling(window=period_rsi).mean()
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+        data['RSI'] = rsi
 
 @app.route('/indicator')
 def indicators():
     return render_template('indicator.html')
+
+n_years = 20
+period = n_years * 365
+def technicalIndicator(indi, data):
+    if indi == "Moving Average":
+        period_ma = 15
+        data[f'{period_ma} Day MA'] = data['Close'].rolling(window=period_ma).mean()
+    elif indi == "RSI":
+        period_rsi = 15
+        delta = data['Close'].diff(1)
+        gain = delta.where(delta > 0, 0)
+        loss = -delta.where(delta < 0, 0)
+        avg_gain = gain.rolling(window=period_rsi).mean()
+        avg_loss = loss.rolling(window=period_rsi).mean()
+        rs = avg_gain / avg_loss
+        rsi = 100 - (100 / (1 + rs))
+        data['RSI'] = rsi
+
+@app.route('/results', methods=['POST'])
+def results():
+    # Get the selected stock symbol from the form
+    stock_symbol = request.form.get('stock_symbol')
+
+    try:
+        data = yf.download(stock_symbol, period="1d", interval="1m", auto_adjust=True)
+        data2 = data.iloc[25:36]
+        technicalIndicator("Moving Average", data)  # Calculate Moving Average
+        technicalIndicator("RSI", data)  # Calculate RSI
+
+        # Calculate the moving average and RSI
+        fifteen_day_ma = data['15 Day MA']
+        rsi = data['RSI']
+        # Create a Plotly figure for the Moving Average
+        import plotly.express as px
+
+        fig_ma = px.line(data_frame=data, x=data.index, y=fifteen_day_ma, title=f'15 Day MA for {stock_symbol}')
+        fig_ma.update_xaxes(title='Date')
+        fig_ma.update_yaxes(title='15 Day MA')
+
+        # Convert the Moving Average plot to HTML
+        plot_html = fig_ma.to_html()
+
+        fig_rsi = px.line(data_frame=data, x=data.index, y=rsi, title=f'RSI for {stock_symbol}')
+        fig_rsi.update_xaxes(title='Date')
+        fig_rsi.update_yaxes(title='RSI')
+
+        # Convert the RSI plot to HTML
+        rsi_plot_html = fig_rsi.to_html()
+
+        # Predict the output data
+        data.reset_index(inplace=True)
+        data["Datetime"] = data["Datetime"].dt.tz_localize(None)
+        df_train = data[['Datetime', 'Close']].rename(columns={"Datetime": "ds", "Close": "y"})
+        m = Prophet()
+        m.fit(df_train)
+        future = m.make_future_dataframe(periods=period)
+        forecast = m.predict(future)
+        print(forecast)
+
+        fig_forecast = plot_plotly(m, forecast)
+
+        # Convert the Prophet forecast plot to HTML
+        forecast_plot_html = fig_forecast.to_html()
+
+        return render_template('indicator.html', data=data2.to_html(), stock_symbol=stock_symbol,
+                               plot_html=plot_html, rsi_plot_html=rsi_plot_html, forecast_plot_html=forecast_plot_html)
+    except Exception as e:
+        error_message = f"Error: {e}"
+        return render_template('indicator.html', error_message=error_message)
 
 @app.route('/crypto')
 def crypto():
