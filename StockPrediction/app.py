@@ -70,11 +70,6 @@ def get_index_data(symbol):
     except Exception as e:
         return f"Error: {e}"
 
-def get_logo_url(stock_symbol):
-    stock = yf.Ticker(stock_symbol)
-    logo_url = stock.info.get('logo_url', '')  # Get the logo URL from Yahoo Finance
-    return logo_url
-
 @app.route('/')
 @app.route('/home')
 def home():
@@ -93,10 +88,10 @@ def home():
         stock_info = {
             'symbol': stock_symbol,
             'name': stock.info.get('longName', ''),
-            'price': round(stock.history(period="1d")['Close'].iloc[-1], 2),  # Round to 2 decimal places
+            'price': round(stock.history(period="1d")['Close'].iloc[-1], 2),
             'change': round(stock.history(period="1d")['Close'].iloc[-1] - stock.history(period="1d")['Open'].iloc[0],
-                            2),  # Round to 2 decimal places
-             'logo_url': "",
+                            2),
+             'logo_filename': f'{stock_symbol}.png',
         }
         stock_data.append(stock_info)
 
@@ -236,8 +231,6 @@ def sentiment():
 @app.route('/resultsentiment', methods=['POST'])
 def resultssentiment():
     stock_symbol = request.form.get('stock_symbol')
-
-
     return render_template('sentiment.html',stock_symbol=stock_symbol)
 
 

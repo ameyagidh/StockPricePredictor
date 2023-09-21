@@ -15,6 +15,15 @@
         }
 
         .feature img {
+            max-width: 100%; /* Ensure images don't exceed their container width */
+            transition: transform 0.3s ease; /* Smooth transition for scaling */
+        }
+
+        .feature img:hover {
+            transform: scale(1.1); /* Scale up the image on hover */
+        }
+
+        .feature img {
             max-width: 100%; /* Make images responsive to their container */
             height: auto;
             border: 3px solid #ccc; /* Add a border to images */
@@ -24,6 +33,27 @@
         .feature h2 {
             margin-top: 15px; /* Adjust spacing between image and heading */
         }
+      .feature-link {
+            text-decoration: none; /* Remove underline from links */
+            color: #333; /* Set the default text color */
+            transition: color 0.3s ease; /* Smooth transition for text color change */
+        }
+
+        .feature-link:hover {
+            color: #007bff; /* Change text color to blue on hover */
+        }
+
+
+         .card-img {
+        max-width: 100px; /* Adjust the maximum width as needed */
+        height: auto;
+    }
+
+    .card-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     </style>
 </head>
 <body>
@@ -37,6 +67,9 @@
                 <li><a href="/crypto">Crypto</a></li>
                 <li><a href="/news">News</a></li>
                 <li><a href="/sentiment">Sentiment Analysis</a></li>
+                <li><a href="/lstm">LSTM</a></li>
+                <li><a href="/arima">ARIMA</a></li>
+                <li><a href="/lr">Linear Regression</a></li>
             </ul>
         </div>
     </nav>
@@ -50,17 +83,14 @@
         </header>
     </div>
 
-<div class="container">
-    <h1 class="mb-4">Top Stocks</h1>
+
+           <div class="container">
+    <h1 class="mb-3">Top Stocks</h1>
     <div class="row">
         {% for stock in stock_data %}
         <div class="col-md-4">
             <div class="card mb-4">
-                {% if stock.logo_url %}
-                <img src="{{ stock.logo_url }}" class="card-img-top" alt="{{ stock.name }} Logo">
-                {% else %}
-                <img src="/static/placeholder.jpg" class="card-img-top" alt="Placeholder Image">
-                {% endif %}
+                <img class="card-img" src="{{ url_for('static', filename=stock.logo_filename) }}" alt="{{ stock.name }} logo">
                 <div class="card-body">
                     <h5 class="card-title">{{ stock.name }}</h5>
                     <p class="card-text">
@@ -119,45 +149,47 @@
         </div>
     </div>
    <div class="container">
-    <!-- Featured Section -->
-    <h3 class="mt-5">Features</h3> <!-- Added margin-top for separation -->
-    <section class="featured-section">
-        <div class="row">
-            <div class="col-md-4 feature">
-                <a href="/indicator"> <!-- Add a link to the /indicators page -->
-                    <img src="{{ url_for('static', filename='marsi.jpeg') }}" alt="Analysis Icon" class="img-fluid rounded">
-                    <h2>Moving average and RSI indicator</h2>
-                </a>
+    <div class="container">
+        <!-- Featured Section -->
+  <div class="container">
+        <!-- Featured Section -->
+        <h3 class="mt-5">Features</h3>
+        <section class="featured-section">
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <a href="/indicator">
+                        <img src="{{ url_for('static', filename='marsi.jpeg') }}" alt="Analysis Icon" class="img-fluid rounded feature-img">
+                        <h2>Moving average and RSI indicator</h2>
+                    </a>
+                </div>
+                <div class="col-md-4 feature">
+                    <a href="/crypto">
+                        <img src="{{ url_for('static', filename='crypto.jpeg') }}" alt="Crypto Icon" class="img-fluid rounded feature-img">
+                        <h2>Crypto tracker</h2>
+                    </a>
+                </div>
+                <div class="col-md-4 feature">
+                    <a href="/news">
+                        <img src="{{ url_for('static', filename='marketsentiment.jpeg') }}" alt="News Icon" class="img-fluid rounded feature-img">
+                        <h2>Stay Informed</h2>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4 feature">
-                <a href="/crypto"> <!-- Add a link to the /indicators page -->
-                    <img src="{{ url_for('static', filename='crypto.jpeg') }}" alt="Crypto Icon" class="img-fluid rounded">
-                    <h2>Crypto tracker</h2>
-                </a>
+            <div class="row">
+                <div class="col-md-6 feature">
+                    <a href="/sentiment">
+                        <img src="{{ url_for('static', filename='newspaper.jpeg') }}" alt="Sentiment Analysis Icon" class="img-fluid rounded feature-img">
+                        <h2>Sentiment Analysis</h2>
+                    </a>
+                </div>
+                <div class="col-md-6 feature">
+                    <a href="/lstm">
+                        <img src="{{ url_for('static', filename='aithink.jpeg') }}" alt="Deep learning Icon" class="img-fluid rounded feature-img">
+                        <h2>AI predictors</h2>
+                    </a>
+                </div>
             </div>
-            <div class="col-md-4 feature">
-                <a href="/news"> <!-- Add a link to the /indicators page -->
-                    <img src="{{ url_for('static', filename='marketsentiment.jpeg') }}" alt="News Icon" class="img-fluid rounded">
-                    <h2>Stay Informed</h2>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 feature">
-                <a href="/sentiment"> <!-- Add a link to the /indicators page -->
-                    <img src="{{ url_for('static', filename='newspaper.jpeg') }}" alt="Sentiment Analysis Icon" class="img-fluid rounded">
-                    <h2>Sentiment Analysis</h2>
-                </a>
-            </div>
-            <div class="col-md-6 feature">
-                <a href="/lstm"> <!-- Add a link to the /indicators page -->
-                    <img src="{{ url_for('static', filename='aithink.jpeg') }}" alt="Deep learning Icon" class="img-fluid rounded">
-                    <h2>AI predictors</h2>
-                </a>
-            </div>
-        </div>
-    </section>
-</div>
-
+        </section>
+    </div>
 </body>
 </html>
