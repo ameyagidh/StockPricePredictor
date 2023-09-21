@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sentiment Analysis</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>TradeGenius -- Ameya</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Sentiment Analysis</h1>
-    <p>Here are the results of sentiment analysis:</p>
-    <p>Positive Sentiment: 75%</p>
-    <p>Negative Sentiment: 25%</p>
-    <!-- You can add more content or visualizations here -->
+    <!-- Navigation Bar -->
+     <nav class="navbar">
+        <div class="my-logo"><a class="logo" href="/">Trade Genius</a></div>
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="/home">Stocks</a></li>
+                <li><a href="/indicator">Indicators</a></li>
+                <li><a href="/crypto">Crypto</a></li>
+                <li><a href="/news">News</a></li>
+                <li><a href="/sentiment">Sentiment Analysis</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<div class="container mt-4">
+        <h1 class="mb-4">Stock Data Viewer</h1>
+        <form action="/resultsentiment" method="post">
+            <div class="form-group">
+                <label for="stock_symbol">Select a Stock:</label>
+                <select class="form-control" name="stock_symbol" id="stock_symbol" required>
+                    <option value="AAPL">AAPL (Apple Inc.)</option>
+                    <option value="MSFT">MSFT (Microsoft Corporation)</option>
+                    <option value="GOOGL">GOOGL (Alphabet Inc. - Class A)</option>
+                    <option value="AMZN">AMZN (Amazon.com Inc.)</option>
+                    <option value="TSLA">TSLA (Tesla, Inc.)</option>
+                    <option value="FB">FB (Meta Platforms, Inc.)</option>
+                    <option value="BRK-B">BRK-B (Berkshire Hathaway Inc. - Class B)</option>
+                    <option value="JPM">JPM (JPMorgan Chase & Co.)</option>
+                    <option value="NVDA">NVDA (NVIDIA Corporation)</option>
+                    <option value="AAP">AAP (Advance Auto Parts, Inc.)</option>
+                    <option value="DIS">DIS (The Walt Disney Company)</option>
+                    <option value="KO">KO (The Coca-Cola Company)</option>
+                    <option value="INTC">INTC (Intel Corporation)</option>
+                    <option value="VZ">VZ (Verizon Communications Inc.)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+         {% if stock_symbol %}
+        <h2 class="mt-4">Selected Stock: {{ stock_symbol }}</h2>
+        {% endif %}
+</div>
 </body>
 </html>

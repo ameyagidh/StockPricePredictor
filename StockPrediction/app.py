@@ -56,13 +56,52 @@ toolbar = DebugToolbarExtension(app)
 #     news_data = get_parsed_news(stock_symbols, 15)
 #     return render_template('news.html', news=news_data)
 
-@app.route('/')
-def home():
-    return render_template('home.html')
+def get_index_data(symbol):
+    try:
+        # Fetch data for the specified symbol (e.g., "^GSPC" for S&P 500, "^IXIC" for NASDAQ)
+        data_ind = yf.download(symbol, period="1d", interval="1d")
+        # Round numerical columns to 2 decimal places
+        data_ind['Open'] = data_ind['Open'].round(2)
+        data_ind['High'] = data_ind['High'].round(2)
+        data_ind['Low'] = data_ind['Low'].round(2)
+        data_ind['Close'] = data_ind['Close'].round(2)
+        data_ind['Volume'] = data_ind['Volume'].round(2)
+        return data_ind.to_html(classes="table table-bordered")
+    except Exception as e:
+        return f"Error: {e}"
 
+def get_logo_url(stock_symbol):
+    stock = yf.Ticker(stock_symbol)
+    logo_url = stock.info.get('logo_url', '')  # Get the logo URL from Yahoo Finance
+    return logo_url
+
+@app.route('/')
 @app.route('/home')
-def home2():
-    return render_template('home.html')
+def home():
+    sp500_data = get_index_data("^GSPC")
+    # Get NASDAQ index data
+    nasdaq_data = get_index_data("^IXIC")
+
+    top_stocks = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'TSLA','NVDA']
+
+    # Initialize an empty list to store stock data
+    stock_data = []
+
+    # Fetch data for each top stock
+    for stock_symbol in top_stocks:
+        stock = yf.Ticker(stock_symbol)
+        stock_info = {
+            'symbol': stock_symbol,
+            'name': stock.info.get('longName', ''),
+            'price': round(stock.history(period="1d")['Close'].iloc[-1], 2),  # Round to 2 decimal places
+            'change': round(stock.history(period="1d")['Close'].iloc[-1] - stock.history(period="1d")['Open'].iloc[0],
+                            2),  # Round to 2 decimal places
+             'logo_url': "",
+        }
+        stock_data.append(stock_info)
+
+    return render_template('home.html', sp500_data=sp500_data, nasdaq_data=nasdaq_data, stock_data=stock_data)
+
 
 # Function to scrape data from the API and parse it using Beautiful Soup
 # Function to scrape data from the API and parse it using Beautiful Soup
@@ -189,9 +228,18 @@ def crypto():
     cryptocurrencies = data.get("data")
     return render_template('crypto.html', cryptocurrencies=cryptocurrencies)
 
+
 @app.route('/sentiment')
 def sentiment():
     return render_template('sentiment.html')
+
+@app.route('/resultsentiment', methods=['POST'])
+def resultssentiment():
+    stock_symbol = request.form.get('stock_symbol')
+
+
+    return render_template('sentiment.html',stock_symbol=stock_symbol)
+
 
 @app.route('/arima')
 def arima():

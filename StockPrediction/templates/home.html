@@ -3,39 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeGenius</title>
+    <title>TradeGenius -- Ameya</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='enhanced-style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for image alignment and size */
+        .feature {
+            text-align: center;
+            margin-bottom: 30px; /* Increased margin for better spacing */
+        }
+
+        .feature img {
+            max-width: 100%; /* Make images responsive to their container */
+            height: auto;
+            border: 3px solid #ccc; /* Add a border to images */
+            border-radius: 10px; /* Add rounded corners */
+        }
+
+        .feature h2 {
+            margin-top: 15px; /* Adjust spacing between image and heading */
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="my-logo"><a class="logo" href="/" >Trade Genius</a></div>
+        <div class="my-logo"><a class="logo" href="/">Trade Genius</a></div>
         <div class="container">
             <ul class="nav-links">
                 <li><a href="/home">Stocks</a></li>
                 <li><a href="/indicator">Indicators</a></li>
                 <li><a href="/crypto">Crypto</a></li>
                 <li><a href="/news">News</a></li>
+                <li><a href="/sentiment">Sentiment Analysis</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container">
-        <h1>Welcome to the Stock Web App</h1>
-        <p>Get real-time stock data, manage your portfolio, and stay updated with the latest news.</p>
-
-        <!-- Stock Selection Form -->
-        <form action="/predict" method="POST">
-            <label for="stock_symbol">Select a Stock:</label>
-            <select id="stock_symbol" name="stock_symbol" required>
-                <option value="AAPL">Apple Inc.</option>
-                <option value="GOOGL">Alphabet Inc.</option>
-                <option value="MSFT">Microsoft Corporation</option>
-
-            </select>
-            <button type="submit">Predict</button>
-        </form>
+        <header class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome to the Stock Web App</h1>
+                <p>Get real-time stock data, manage your portfolio, and stay updated with the latest news.</p>
+            </div>
+        </header>
     </div>
+
+<div class="container">
+    <h1 class="mb-4">Top Stocks</h1>
+    <div class="row">
+        {% for stock in stock_data %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                {% if stock.logo_url %}
+                <img src="{{ stock.logo_url }}" class="card-img-top" alt="{{ stock.name }} Logo">
+                {% else %}
+                <img src="/static/placeholder.jpg" class="card-img-top" alt="Placeholder Image">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ stock.name }}</h5>
+                    <p class="card-text">
+                        Symbol: {{ stock.symbol }}<br>
+                        Price: ${{ stock.price }}<br>
+                        Change: ${{ stock.change }}
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+    <div class="container mt-4">
+        <h1 class="mb-4">S&P 500 and NASDAQ Index Data</h1>
+
+        <h2>S&P 500 Index</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Close</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ sp500_data | safe }}
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="mt-4">NASDAQ Index</h2>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Date</th>
+                        <th>Open</th>
+                        <th>High</th>
+                        <th>Low</th>
+                        <th>Close</th>
+                        <th>Volume</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ nasdaq_data | safe }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+   <div class="container">
+    <!-- Featured Section -->
+    <h3 class="mt-5">Features</h3> <!-- Added margin-top for separation -->
+    <section class="featured-section">
+        <div class="row">
+            <div class="col-md-4 feature">
+                <a href="/indicator"> <!-- Add a link to the /indicators page -->
+                    <img src="{{ url_for('static', filename='marsi.jpeg') }}" alt="Analysis Icon" class="img-fluid rounded">
+                    <h2>Moving average and RSI indicator</h2>
+                </a>
+            </div>
+            <div class="col-md-4 feature">
+                <a href="/crypto"> <!-- Add a link to the /indicators page -->
+                    <img src="{{ url_for('static', filename='crypto.jpeg') }}" alt="Crypto Icon" class="img-fluid rounded">
+                    <h2>Crypto tracker</h2>
+                </a>
+            </div>
+            <div class="col-md-4 feature">
+                <a href="/news"> <!-- Add a link to the /indicators page -->
+                    <img src="{{ url_for('static', filename='marketsentiment.jpeg') }}" alt="News Icon" class="img-fluid rounded">
+                    <h2>Stay Informed</h2>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 feature">
+                <a href="/sentiment"> <!-- Add a link to the /indicators page -->
+                    <img src="{{ url_for('static', filename='newspaper.jpeg') }}" alt="Sentiment Analysis Icon" class="img-fluid rounded">
+                    <h2>Sentiment Analysis</h2>
+                </a>
+            </div>
+            <div class="col-md-6 feature">
+                <a href="/lstm"> <!-- Add a link to the /indicators page -->
+                    <img src="{{ url_for('static', filename='aithink.jpeg') }}" alt="Deep learning Icon" class="img-fluid rounded">
+                    <h2>AI predictors</h2>
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradeGenius</title>
+      <title>TradeGenius -- Ameya</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -16,6 +17,7 @@
                 <li><a href="/indicator">Indicators</a></li>
                 <li><a href="/crypto">Crypto</a></li>
                 <li><a href="/news">News</a></li>
+                <li><a href="/sentiment">Sentiment Analysis</a></li>
             </ul>
         </div>
     </nav>
@@ -60,7 +62,7 @@
         </table>
         {% endif %}
 
-        <h2 class="mt-4">Prophet Forecast</h2>
+        <h2 class="mt-4">Time Series Forecast</h2>
         {% if forecast_plot_html %}
         <div>
         {{ forecast_plot_html | safe }}
