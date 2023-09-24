@@ -1,3 +1,4 @@
+import pickle
 from multiprocessing import Process
 from urllib.request import Request, urlopen
 
@@ -22,7 +23,7 @@ app = Flask(__name__)
 app.config['DEBUG_TB_ENABLED'] = True
 app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a secure secret key
 toolbar = DebugToolbarExtension(app)
-
+val = False
 
 def get_index_data(symbol):
     try:
@@ -64,6 +65,7 @@ def home():
         stock_data.append(stock_info)
 
     return render_template('home.html', sp500_data=sp500_data, nasdaq_data=nasdaq_data, stock_data=stock_data)
+
 
 
 # Function to scrape data from the API and parse it using Beautiful Soup
@@ -177,6 +179,14 @@ def crypto():
     cryptocurrencies = data.get("data")
     return render_template('crypto.html', cryptocurrencies=cryptocurrencies)
 
+
+model_pkl_file = 'Models/SentimentAnalysis/sentiment_model.pkl'
+prev_symbol = None
+prev_df = None
+
+with open(model_pkl_file, 'rb') as pkl_file:
+    loaded_model = pickle.load(pkl_file)
+
 def generate_and_save_plot(mean_df):
     # Create the plot
     fig = plt.figure(figsize=(8, 6))
@@ -189,7 +199,9 @@ def generate_and_save_plot(mean_df):
 
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment():
-    return render_template('sentiment.html', sentiment_df=None, plot_filename=None)
+    return render_template('sentiment.html', sentiment_df=None, plot_filename=None, sentiment_done=False)
+
+prev_stocksymbol = "APPL"
 
 @app.route('/resultsentiment', methods=['POST'])
 def resultssentiment():
@@ -202,7 +214,11 @@ def resultssentiment():
     plot_process = Process(target=generate_and_save_plot, args=(mean_df,))
     plot_process.start()
     plot_process.join()
-    return render_template('sentiment.html', stock_symbol=stock_symbol, sentiment_df=df[:15],plot_filename="plot.png")
+    if 'news_article' in request.form:
+        news_article = request.form['news_article']
+        print(news_article)
+    return render_template('sentiment.html', stock_symbol=stock_symbol, sentiment_df=df[:15],
+                           plot_filename="plot.png", sentiment_done=val)
 
 @app.route('/arima')
 def arima():

@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 from datetime import datetime
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
@@ -5,11 +6,47 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import matplotlib.pyplot as plt
 import pickle
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer,WordNetLemmatizer
+from nltk.tokenize import word_tokenize
+import warnings
+warnings.filterwarnings("ignore")
 
 class StockSentimentClassifier:
     def __init__(self,ticker):
         self.vader = SentimentIntensityAnalyzer()
         self.ticker = ticker
+
+    def clean_news(self,news):
+        '''
+        Input:
+            news: a string containing a news article.
+        Output:
+            news_cleaned: a processed news article.
+        '''
+        temp = []
+        ps = PorterStemmer()
+        lemmatizer = WordNetLemmatizer()
+
+        # Remove links
+        news = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+#]|[!*\(\),]|''(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', news)
+
+        # Remove HTML code
+        news = re.sub('<.*?>', '', news)
+
+        # Remove special characters, numbers, and convert to lowercase
+        news = re.sub(r'[^a-zA-Z\s]', '', news).lower()
+
+        # Tokenization
+        tokens = word_tokenize(news)
+
+        # Remove stopwords, apply lemmatization, and then apply Porter stemming
+        tokens_cleaned = [ps.stem(lemmatizer.lemmatize(token)) for token in tokens if
+                          token not in stopwords.words('english')]
+
+        news_cleaned = ' '.join(tokens_cleaned)
+
+        return news_cleaned
 
     def get_stock_data(self, ticker):
         current_date = datetime.now().strftime("%Y-%m-%d")
