@@ -59,13 +59,13 @@ class StockSentimentClassifier:
 
         return df
 
-    def plot_sentiment(self, ticker):
-        df = self.get_stock_data(ticker)
-        plt.figure(figsize=(10, 8))
+    def plot_sentiment(self, ticker,df):
+        # df = self.get_stock_data(ticker)
+        # plt.figure(figsize=(10, 8))
         df['compound'] = pd.to_numeric(df['compound'], errors='coerce')
         mean_df = df.groupby(['ticker', 'date'])['compound'].mean().unstack()
-        mean_df.plot(kind='bar')
-        return df, plt
+        # mean_df.plot(kind='bar')
+        return mean_df
 
     def save_sentiment_model(self, filename='sentiment_model.pkl'):
         # Save the sentiment analysis model to a pickle file

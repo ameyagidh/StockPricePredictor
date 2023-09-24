@@ -1,3 +1,4 @@
+from multiprocessing import Process
 from urllib.request import Request, urlopen
 
 from bs4 import BeautifulSoup
@@ -11,7 +12,9 @@ from plotly import graph_objs as go
 from datetime import date
 import requests
 from Models.SentimentAnalysis.stocksentiment import StockSentimentClassifier
+import matplotlib.pyplot as plt
 
+STATIC_DIR = 'static'
 
 app = Flask(__name__)
 
@@ -174,6 +177,15 @@ def crypto():
     cryptocurrencies = data.get("data")
     return render_template('crypto.html', cryptocurrencies=cryptocurrencies)
 
+def generate_and_save_plot(mean_df):
+    # Create the plot
+    fig = plt.figure(figsize=(8, 6))
+    # Plot your data here
+    mean_df.plot(kind='bar')
+    # Save the plot as an image
+    plot_path = f"{STATIC_DIR}/plot.jpeg"
+    plt.savefig(plot_path)
+    plt.close()
 
 @app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment():
@@ -185,10 +197,12 @@ def resultssentiment():
     # Use the StockSentimentClassifier to perform sentiment analysis
     classifier = StockSentimentClassifier(stock_symbol)
     df = classifier.get_stock_data(stock_symbol)
-    print(df)
-    # Pass the sentiment data and plot filename to the template
-    return render_template('sentiment.html',stock_symbol = stock_symbol,sentiment_df =df[:15])
-
+    mean_df = classifier.plot_sentiment(stock_symbol,df)
+    # Create a separate process to generate and save the plot
+    plot_process = Process(target=generate_and_save_plot, args=(mean_df,))
+    plot_process.start()
+    plot_process.join()
+    return render_template('sentiment.html', stock_symbol=stock_symbol, sentiment_df=df[:15],plot_filename="plot.png")
 
 @app.route('/arima')
 def arima():

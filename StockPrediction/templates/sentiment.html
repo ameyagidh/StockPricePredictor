@@ -79,6 +79,10 @@
 <p>No sentiment data available.</p>
 {% endif %}
 
+ {% if plot_filename %}
+    <h3>Sentiment analysis of {{stock_symbol}}</h3>
+<img src="../static/plot.jpeg" alt="Sentiment Analysis Plot">
+{% endif %}
 
 </div>
 </body>
