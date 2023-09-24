@@ -10,6 +10,8 @@ from prophet.plot import plot_plotly
 from plotly import graph_objs as go
 from datetime import date
 import requests
+from Models.SentimentAnalysis.stocksentiment import StockSentimentClassifier
+
 
 app = Flask(__name__)
 
@@ -18,43 +20,6 @@ app.config['DEBUG_TB_ENABLED'] = True
 app.config['SECRET_KEY'] = 'your_secret_key'  # Replace with a secure secret key
 toolbar = DebugToolbarExtension(app)
 
-
-# def get_parsed_news(tickers, n):
-#     # Define the URL for Finviz
-#     finviz_url = 'https://finviz.com/quote.ashx?t='
-#     news_tables = {}
-#     # Loop through each ticker to fetch news data
-#     for ticker in tickers:
-#         url = finviz_url + ticker
-#
-#         # Make a request to the URL
-#         req = Request(url=url, headers={'user-agent': 'sentiment-app'})
-#         response = urlopen(req)
-#         html = BeautifulSoup(response, features='html.parser')
-#
-#         # Find the news table
-#         news_table = html.find(id='news-table')
-#         news_tables[ticker] = news_table
-#
-#     parsed_news = []
-#
-#     # Loop through news tables and extract relevant information
-#     for ticker, news_table in news_tables.items():
-#         for row in news_table.findAll('tr'):
-#             anchor_tag = row.a
-#             time_data = row.td.text.strip().split()
-#
-#             if anchor_tag and len(time_data) >= 2:
-#                 date, time = time_data[0], time_data[1]
-#                 title = anchor_tag.get_text()
-#                 parsed_news.append([ticker, date, time, title])
-#     return parsed_news
-
-# @app.route('/news')
-# def news():
-#     stock_symbols = "GOOG"  # Replace with the desired stock symbols
-#     news_data = get_parsed_news(stock_symbols, 15)
-#     return render_template('news.html', news=news_data)
 
 def get_index_data(symbol):
     try:
@@ -138,20 +103,6 @@ def indicators():
 
 n_years = 20
 period = n_years * 365
-def technicalIndicator(indi, data):
-    if indi == "Moving Average":
-        period_ma = 15
-        data[f'{period_ma} Day MA'] = data['Close'].rolling(window=period_ma).mean()
-    elif indi == "RSI":
-        period_rsi = 15
-        delta = data['Close'].diff(1)
-        gain = delta.where(delta > 0, 0)
-        loss = -delta.where(delta < 0, 0)
-        avg_gain = gain.rolling(window=period_rsi).mean()
-        avg_loss = loss.rolling(window=period_rsi).mean()
-        rs = avg_gain / avg_loss
-        rsi = 100 - (100 / (1 + rs))
-        data['RSI'] = rsi
 
 @app.route('/results', methods=['POST'])
 def results():
@@ -224,14 +175,19 @@ def crypto():
     return render_template('crypto.html', cryptocurrencies=cryptocurrencies)
 
 
-@app.route('/sentiment')
+@app.route('/sentiment', methods=['GET', 'POST'])
 def sentiment():
-    return render_template('sentiment.html')
+    return render_template('sentiment.html', sentiment_df=None, plot_filename=None)
 
 @app.route('/resultsentiment', methods=['POST'])
 def resultssentiment():
     stock_symbol = request.form.get('stock_symbol')
-    return render_template('sentiment.html',stock_symbol=stock_symbol)
+    # Use the StockSentimentClassifier to perform sentiment analysis
+    classifier = StockSentimentClassifier(stock_symbol)
+    df = classifier.get_stock_data(stock_symbol)
+    print(df)
+    # Pass the sentiment data and plot filename to the template
+    return render_template('sentiment.html',stock_symbol = stock_symbol,sentiment_df =df[:15])
 
 
 @app.route('/arima')

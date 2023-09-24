@@ -50,9 +50,36 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
-         {% if stock_symbol %}
+          {% if stock_symbol %}
         <h2 class="mt-4">Selected Stock: {{ stock_symbol }}</h2>
         {% endif %}
+
+   {% if sentiment_df is not none and sentiment_df.shape[0] > 0 %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Title</th>
+            <th>Compound Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for index, row in sentiment_df.iterrows() %}
+        <tr>
+            <td>{{ row['date'] }}</td>
+            <td>{{ row['time'] }}</td>
+            <td>{{ row['title'] }}</td>
+            <td>{{ row['compound'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No sentiment data available.</p>
+{% endif %}
+
+
 </div>
 </body>
 </html>
