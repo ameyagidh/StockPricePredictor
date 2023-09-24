@@ -37,19 +37,23 @@ for index, row in enumerate(stock_rows):
         timestamp = timestamp_.text
         date_data = [data.strip() for data in timestamp.split(" ") if data.strip()]  # Remove empty strings
         # print(date_data)
-
-        if "Today" in date_data:
-            date_data[date_data.index("Today")] = current_date
-            prev_date =  current_date
-
+        # print(len(date_data))
         if len(date_data) == 1:
             time = date_data[0]
             date = prev_date
         else:
             date = date_data[0]
+            if date != "Today":
+                date = datetime.strptime(date_data[0], "%b-%d-%y").strftime("%Y-%m-%d")
+                prev_date = date
+            else:
+                date = current_date
+                prev_date = current_date
             time = date_data[1]
+
     parsed_data.append([key,date,time,title])
-print(parsed_data)
+
+# print(parsed_data)
 
 # df = pd.DataFrame(parsed_data, columns=['ticker', 'date', 'time', 'title'])
 # vader = SentimentIntensityAnalyzer()
