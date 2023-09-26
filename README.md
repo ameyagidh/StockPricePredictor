@@ -67,6 +67,24 @@ The Stock Market Prediction project explores a holistic approach to predicting s
 
 The detailed analysis and thorough evaluation of different strategies and models provide insights into the complexities of stock market prediction and demonstrate the potential of combining multiple approaches for improved accuracy.
 
+
+## Screenshots
+<img width="739" alt="LSTM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/b6f5ffb5-fb19-42ea-8f7b-b41139839883">
+<img width="1496" alt="Screenshot 2023-09-19 at 3 53 41 PM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/5c8f0e9f-1c20-4494-a5aa-8d68b5020b62">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 24 03 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/61e4e3af-7407-4289-866e-86c1b32824bc">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 24 14 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/0945efbd-b4b8-468a-bcb3-7ea031d674e5">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 25 05 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/f1bf346d-5ef9-456c-aa0e-520156b77998">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 25 12 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/f1266e5e-e8ee-43eb-b5ab-d053fe3ace6d">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 25 51 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/8df50371-df22-4f7d-915d-0b9a1f84a60f">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 25 55 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/77b38868-2b5a-42db-86a4-582e572c1851">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 26 05 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/6689b5dd-2942-4b4b-9cb1-7229bcfc8ce9">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 27 05 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/21a2e9c4-8402-4df6-bc91-d32fd2bd92cc">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 27 19 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/7e3958fa-8fe3-47a2-9029-2efca82e9329">
+<img width="1496" alt="Screenshot 2023-09-26 at 2 27 47 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/045fa5d0-5834-4502-9fe6-f6225a0ba638">
+<img width="720" alt="Screenshot 2023-09-26 at 2 33 54 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/5377c425-c55e-49ed-ac7c-0d4e658f7f89">
+<img width="567" alt="Screenshot 2023-09-26 at 2 34 37 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/177ac7ea-40ec-48fe-93f4-d13d2f7ff9fe">
+
+
 ## References
 https://www.investing.com/equities/
 
