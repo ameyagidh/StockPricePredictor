@@ -79,7 +79,6 @@ The detailed analysis and thorough evaluation of different strategies and models
 <img width="1496" alt="Screenshot 2023-09-26 at 2 26 05 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/6689b5dd-2942-4b4b-9cb1-7229bcfc8ce9">
 <img width="1496" alt="Screenshot 2023-09-26 at 2 27 05 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/21a2e9c4-8402-4df6-bc91-d32fd2bd92cc">
 <img width="1496" alt="Screenshot 2023-09-26 at 2 27 19 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/7e3958fa-8fe3-47a2-9029-2efca82e9329">
-<img width="1496" alt="Screenshot 2023-09-26 at 2 27 47 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/045fa5d0-5834-4502-9fe6-f6225a0ba638">
 <img width="739" alt="LSTM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/b6f5ffb5-fb19-42ea-8f7b-b41139839883">
 <img width="720" alt="Screenshot 2023-09-26 at 2 33 54 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/5377c425-c55e-49ed-ac7c-0d4e658f7f89">
 <img width="567" alt="Screenshot 2023-09-26 at 2 34 37 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/177ac7ea-40ec-48fe-93f4-d13d2f7ff9fe">
