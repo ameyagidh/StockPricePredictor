@@ -83,10 +83,17 @@ The detailed analysis and thorough evaluation of different strategies and models
 <img width="720" alt="Screenshot 2023-09-26 at 2 33 54 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/5377c425-c55e-49ed-ac7c-0d4e658f7f89">
 <img width="567" alt="Screenshot 2023-09-26 at 2 34 37 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/177ac7ea-40ec-48fe-93f4-d13d2f7ff9fe">
 
-## Bitcoin Models
-
+## Bitcoin Predictions
+### Transformers
 ![image1](https://github.com/ameyagidh/StockPricePredictor/assets/65457905/32d06a9f-c2ba-43c5-b4be-7128fa07dc13)
+
+### ARIMA
 ![image7](https://github.com/ameyagidh/StockPricePredictor/assets/65457905/aaa22e32-fcaa-4e9a-98a4-7236d2da0cf1)
+
+### Moving Average
+![image4](https://github.com/ameyagidh/StockPricePredictor/assets/65457905/230c0500-cc83-479f-9576-806459812498)
+
+### Ensemble Model
 ![image8](https://github.com/ameyagidh/StockPricePredictor/assets/65457905/dfd24a31-6f6f-4e50-b9cb-a1e070a392e7)
 
 In the context of stock price prediction, advanced models struggle to capture nonlinear patterns in historical data. However, applying a basic moving average (window size = 10) improves predictions, especially in capturing both upward and downward trends, although it still faces issues with outliers.
