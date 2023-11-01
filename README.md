@@ -83,6 +83,11 @@ The detailed analysis and thorough evaluation of different strategies and models
 <img width="720" alt="Screenshot 2023-09-26 at 2 33 54 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/5377c425-c55e-49ed-ac7c-0d4e658f7f89">
 <img width="567" alt="Screenshot 2023-09-26 at 2 34 37 AM" src="https://github.com/ameyagidh/StockPricePredictor/assets/65457905/177ac7ea-40ec-48fe-93f4-d13d2f7ff9fe">
 
+In the context of stock price prediction, advanced models struggle to capture nonlinear patterns in historical data. However, applying a basic moving average (window size = 10) improves predictions, especially in capturing both upward and downward trends, although it still faces issues with outliers.
+
+The ARIMA model performs well when prices are relatively stable but falters with significant price fluctuations, making it better suited for short-term rather than long-term predictions.
+
+The CNN model's performance on testing data is modest due to its simplicity. However, when combined with the Transformer model and moving averages, a Linear Regression model outperforms all others, including ARIMA, achieving an impressive R2 score of 0.9535. This suggests that the CNN and Moving Averages models capture complementary features for price prediction.
 
 ## References
 https://www.investing.com/equities/
